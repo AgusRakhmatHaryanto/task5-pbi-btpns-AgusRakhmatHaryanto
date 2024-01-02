@@ -2,12 +2,14 @@ package helpers
 
 import (
 	"errors"
-	
-	"github.com/dgrijalva/jwt-go"
+
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
+
 )
 
-func GenerateToken(id uint, email string) (string, error) {
+func GenerateToken(id int, email string) (string, error) {
 	var mySigningKey = []byte("AllYourBase")
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
@@ -21,9 +23,9 @@ func GenerateToken(id uint, email string) (string, error) {
 	return tokenString, nil
 }
 
-func ValidateToken(signedToken string) (*jwt.Token, error) {
+func ValidateToken(encodedToken string) (*jwt.Token, error) {
 	mySigningKey := []byte("AllYourBase")
-	token, err := jwt.Parse(signedToken, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.Parse(encodedToken, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("Invalid token")
 		}

@@ -16,7 +16,7 @@ func AuthMiddleware(db *gorm.DB) gin.HandlerFunc {
 		authHeader := c.GetHeader("Authorization")
 
 		if !strings.Contains(authHeader, "Bearer") {
-			response := helpers.ApiResponseFormatter(http.StatusUnauthorized, "error", nil, "Unauthorized")
+			response := helpers.ApiResponseFormatter("error",http.StatusUnauthorized, "Unauthorized",  nil)
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 			return
 		}
@@ -30,7 +30,7 @@ func AuthMiddleware(db *gorm.DB) gin.HandlerFunc {
 
 		token, err := helpers.ValidateToken(tokenString)
 		if err != nil {
-			response := helpers.ApiResponseFormatter(http.StatusUnauthorized, "error", nil, "Unauthorized")
+			response := helpers.ApiResponseFormatter("error",http.StatusUnauthorized, "Unauthorized",  nil)
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 			return
 		}
@@ -38,7 +38,7 @@ func AuthMiddleware(db *gorm.DB) gin.HandlerFunc {
 		claim, ok := token.Claims.(jwt.MapClaims)
 
 		if !ok || !token.Valid {
-			response := helpers.ApiResponseFormatter(http.StatusUnauthorized, "error", nil, "Unauthorized")
+			response := helpers.ApiResponseFormatter("error", http.StatusUnauthorized, "Unauthorized", nil)
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 			return
 		}
@@ -47,7 +47,7 @@ func AuthMiddleware(db *gorm.DB) gin.HandlerFunc {
 
 		err = db.First(&user, userID).Error
 		if err != nil {
-			response := helpers.ApiResponseFormatter(http.StatusUnauthorized, "error", nil, "Unauthorized")
+			response := helpers.ApiResponseFormatter("error", http.StatusUnauthorized, "Unauthorized", nil)
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 			return
 		}

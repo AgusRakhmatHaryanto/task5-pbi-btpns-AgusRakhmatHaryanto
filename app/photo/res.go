@@ -1,22 +1,21 @@
 package photo
 
 import (
-	"github.com/google/uuid"
 	"github.com/AgusRakhmatHaryanto/task5-pbi-btpns-AgusRakhmatHaryanto/models"
 )
 
 
 type ResPhoto struct {
-	ID        uuid.UUID `json:"id"`
+	ID        int 		`json:"id"`
 	Title     string    `json:"title"`
 	Caption   string    `json:"caption"`
 	PhotoUrl  string    `json:"photo_url"`
-	UserID    uuid.UUID `json:"user_id"`
+	UserID    int		`json:"user_id"`
 	User      models.User
 }
 
 type ResPhotoDefault struct {
-	ID        uuid.UUID `json:"id"`
+	ID        int		`json:"id"`
 	Title     string    `json:"title"`
 	Caption   string    `json:"caption"`
 	PhotoUrl  string    `json:"photo_url"`
@@ -39,7 +38,7 @@ func FormatPhoto(photo *models.Photo, typeRes string) interface{} {
 			Title:    photo.Title,
 			Caption:  photo.Caption,
 			PhotoUrl: photo.PhotoUrl,
-			UserID:   photo.User.ID,
+			UserID:   photo.UserID,
 			User:     *photo.User,
 		}
 	}

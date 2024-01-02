@@ -2,13 +2,12 @@ package models
 
 import (
 	"gorm.io/gorm"
-	"github.com/google/uuid"
 	"time"
 	"github.com/asaskevich/govalidator"
 )
 
 type User struct {
-	ID        uuid.UUID `gorm:"primary_key;type:uuid;default:uuid_generate_v4()" json:"id"`
+	ID        int 		`gorm:"primary_key;autoIncrement" json:"id"`
 	Username  string    `gorm:"type:varchar(255);not null" json:"username" validate:"required"`
 	Email     string    `gorm:"type:varchar(255);not null" json:"email" validate:"required,email"`
 	Password  string    `gorm:"type:varchar(255);not null" json:"password" validate:"required minimum is 6 characters"`

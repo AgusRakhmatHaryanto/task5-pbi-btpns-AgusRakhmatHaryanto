@@ -9,5 +9,5 @@ func main(){
 	database.InitDB()
 	database.MigrateDB()
 	r := routers.InitRouter()
-	r.Run(":8080")
+	r.Run(":8082")
 }

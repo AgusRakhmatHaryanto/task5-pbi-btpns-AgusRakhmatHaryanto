@@ -2,11 +2,10 @@ package user
 
 import (
 	"github.com/AgusRakhmatHaryanto/task5-pbi-btpns-AgusRakhmatHaryanto/models"
-	"github.com/google/uuid"
 )
 
 type ResUser struct {
-	ID       uuid.UUID `json:"id"`
+	ID       int		`json:"id"`
 	Username string    `json:"username"`
 	Email    string    `json:"email"`
 	Photos   []models.Photo

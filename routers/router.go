@@ -22,7 +22,7 @@ func InitRouter() *gin.Engine {
 	{
 		userRoutes.POST("/register", userController.Register)
 		userRoutes.POST("/login", userController.Login)
-		userRoutes.PUT("/update",  userController.Update)
+		userRoutes.PUT("/update/:userId",  userController.Update)
 		userRoutes.DELETE("/delete", userController.Delete)
 	}
 
